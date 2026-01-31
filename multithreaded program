@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <math.h>
-int *numbers; // global array of numbers
-int count; // number of integers
+int *numbers; 
+int count; 
 double mean = 0.0;
 double median = 0.0;
 double stddev = 0.0;
-// ------------------ MEAN THREAD ------------------
+
 void* calc_mean(void* arg) {
 double sum = 0;
 for (int i = 0; i < count; i++)
@@ -15,7 +15,7 @@ sum += numbers[i];
 mean = sum / count;
 pthread_exit(NULL);
 }
-// ------------------ MEDIAN THREAD ------------------
+
 int compare_ints(const void *a, const void *b) {
 return (*(int*)a - *(int*)b);
 }
@@ -34,10 +34,10 @@ median = sorted[count/2];
 free(sorted);
 pthread_exit(NULL);
 }
-// ------------------ STANDARD DEVIATION THREAD ------------------
+
 void* calc_stddev(void* arg) {
 double sum = 0;
-// compute mean first if not yet computed
+
 for (int i = 0; i < count; i++)
 sum += numbers[i];
 double local_mean = sum / count;
